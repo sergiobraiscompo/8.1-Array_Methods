@@ -75,26 +75,33 @@ const pacientes: Pacientes[] = [
 ];
 
 const obtenPacientesAsignadosAPediatria = (pacientes: Pacientes[]): Pacientes[] => {
-  return pacientes.filter((paciente) => paciente.especialidad === "Pediatra")
+  const pacientesPediatria =  pacientes.filter((paciente) => paciente.especialidad === "Pediatra")
+  return pacientesPediatria;
 };
 
 const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (pacientes: Pacientes[]): Pacientes[] => {
-  return pacientes.filter((paciente) => paciente.especialidad === "Pediatra" && paciente.edad <= 10)
+  const pacientesPediatriaMenores10 = pacientes.filter((paciente) => paciente.especialidad === "Pediatra" && paciente.edad <= 10)
+  return pacientesPediatriaMenores10;
 };
 
 const activarProtocoloUrgencia = (pacientes: Pacientes[]): boolean => {
-  let activarProctolo = false;
-  pacientes.find((paciente) => paciente.temperatura > 39 && paciente.frecuenciaCardiaca > 100)
+  const activarProctolo = pacientes.some((paciente) => paciente.temperatura > 39 && paciente.frecuenciaCardiaca > 100);
   return activarProctolo;
 };
 
 const reasignaPacientesAMedicoFamilia = (pacientes: Pacientes[]): Pacientes[] => {
-  pacientes.push((paciente) => paciente.especialidad === "Pediatra")
+  const pacientesPediatria:Pacientes[] = pacientes.filter((paciente) => paciente.especialidad === "Pediatra");
+
+  const pacientesReasignadosaMedicoDeFamilia = ():Pacientes => {
+    return pacientesPediatria.map(paciente => (
+      {...paciente,especialidad: paciente.especialidad === "Medico de familia"}
+    )); 
+    }
+
+  return pacientesReasignadosaMedicoDeFamilia;
 };
 
 const HayPacientesDePediatria = (pacientes: Pacientes[]): boolean => {
-  let quedanPacientes = false;
-
   return pacientes.find((paciente) => paciente.especialidad === "Pediatra")
   ? true
   : false
