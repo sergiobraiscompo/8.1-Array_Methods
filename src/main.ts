@@ -92,11 +92,9 @@ const activarProtocoloUrgencia = (pacientes: Pacientes[]): boolean => {
 const reasignaPacientesAMedicoFamilia = (pacientes: Pacientes[]): Pacientes[] => {
   const pacientesPediatria:Pacientes[] = pacientes.filter((paciente) => paciente.especialidad === "Pediatra");
 
-  const pacientesReasignadosaMedicoDeFamilia = ():Pacientes => {
-    return pacientesPediatria.map(paciente => (
-      {...paciente,especialidad: paciente.especialidad === "Medico de familia"}
-    )); 
-    }
+  const pacientesReasignadosaMedicoDeFamilia = pacientesPediatria.map(paciente => (
+      {...paciente,especialidad: paciente.especialidad = "Medico de familia"}
+    ));
 
   return pacientesReasignadosaMedicoDeFamilia;
 };
@@ -114,26 +112,25 @@ interface NumeroPacientesPorEspecialidad {
 };
   
 const cuentaPacientesPorEspecialidad = (pacientes: Pacientes[]): NumeroPacientesPorEspecialidad => {
-  let listaPacientes = 0;
   let contadorCardiologo: number = 0;
   let contadorMedicoFamilia: number = 0;
   let contadorPediatria: number = 0;
 
-  pacientes.forEach = () => {
+  pacientes.forEach((paciente) => {
       
       if (paciente.especialidad === "Cardiólogo") { 
-          contadorCardiologo ++;
+        contadorCardiologo ++;
       }
   
-      paciente.especialidad === "Medico"
+      paciente.especialidad === "Medico de familia"
       ? contadorMedicoFamilia
-      : contadorPediatria
-      
-      listaPacientes.push = [
-          contadorMedicoFamilia,
-          contadorPediatria,
-          contadorCardiologo,
-      ]
+      : contadorPediatria;
+  })
+
+  let listaPacientes: NumeroPacientesPorEspecialidad = {
+    "medicoDeFamilia": contadorMedicoFamilia,
+    "pediatria": contadorPediatria,
+    "cardiologia": contadorCardiologo
   }
 
   return listaPacientes;
