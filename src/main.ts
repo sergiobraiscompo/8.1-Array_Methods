@@ -47,7 +47,7 @@ const pacientes: Pacientes[] = [
     nombre: "Mary",
     apellidos: "Wien",
     sexo: "Female",
-    temperatura: 36.8,
+    temperatura: 38.5,
     frecuenciaCardiaca: 120,
     especialidad: "Medico de familia",
     edad: 20,
@@ -57,7 +57,7 @@ const pacientes: Pacientes[] = [
     nombre: "Scarlett",
     apellidos: "Somez",
     sexo: "Female",
-    temperatura: 36.8,
+    temperatura: 39,
     frecuenciaCardiaca: 110,
     especialidad: "Cardiólogo",
     edad: 30,
@@ -85,13 +85,15 @@ const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (pacientes: Pacientes
 };
 
 const activarProtocoloUrgencia = (pacientes: Pacientes[]): boolean => {
-  const activarProctolo = pacientes.some((paciente) => paciente.temperatura > 39 && paciente.frecuenciaCardiaca > 100);
-  return !activarProctolo;
+  const pacienteConstantesAlteradas = (paciente: Pacientes): boolean => { return paciente.temperatura > 39 && paciente.frecuenciaCardiaca > 100};
+
+  const activarProtocolo = Boolean(pacientes.find(pacienteConstantesAlteradas));
+
+  return activarProtocolo;
 };
 
 const reasignaPacientesAMedicoFamilia = (pacientes: Pacientes[]): Pacientes[] => {
   const pacientesMedicoFamilia: Pacientes[] = pacientes.filter((paciente) => paciente.especialidad === "Medico de familia");
-  console.log("Pacientes medico de familia:", pacientesMedicoFamilia)
   
   const pacientesReasignadosaMedicoDeFamilia = pacientesMedicoFamilia.concat(obtenPacientesAsignadosAPediatria(pacientes));
 
