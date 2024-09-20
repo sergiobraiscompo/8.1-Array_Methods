@@ -37,8 +37,7 @@ const HayPacientesDePediatria = (): boolean => {
   ? false
   : true
 };
-
-  
+ 
 const cuentaPacientesPorEspecialidad = (pacientes: constantes.Pacientes[]): constantes.NumeroPacientesPorEspecialidad => {
   let contadorCardiologo: number = 0;
   let contadorMedicoFamilia: number = 0;
@@ -66,15 +65,15 @@ const cuentaPacientesPorEspecialidad = (pacientes: constantes.Pacientes[]): cons
 
 
 // Obtener listados
-const pediatria_listado: constantes.Pacientes[] = obtenPacientesAsignadosAPediatria(constantes.pacientes);
-const pediatria_menores_10_listado: constantes.Pacientes[] = obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios(constantes.pacientes);
-const pacientes_pediatria_a_medico_de_familia: constantes.Pacientes[] = reasignaPacientesAMedicoFamilia(pediatria_listado);
+const pediatriaListado: constantes.Pacientes[] = obtenPacientesAsignadosAPediatria(constantes.pacientes);
+const pediatriaMenores10Listado: constantes.Pacientes[] = obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios(constantes.pacientes);
+const pacientesPediatriaAMedicoDeFamilia: constantes.Pacientes[] = reasignaPacientesAMedicoFamilia(pediatriaListado);
 
 // Datos devueltos por consola
-console.log("Pacientes pediatría", "\n", pediatria_listado);
-console.log("Pacientes pediatría menores de 10 años", "\n", pediatria_menores_10_listado);
+console.log("Pacientes pediatría", "\n", pediatriaListado);
+console.log("Pacientes pediatría menores de 10 años", "\n", pediatriaMenores10Listado);
 console.log("Activar protocolo de urgencia", activarProtocoloUrgencia(constantes.pacientes));
-console.log("Pacientes reasignados a médico de familia", "\n", pacientes_pediatria_a_medico_de_familia);
+console.log("Pacientes reasignados a médico de familia", "\n", pacientesPediatriaAMedicoDeFamilia);
 console.log("El pediatra ha terminado: ", HayPacientesDePediatria());
 
 // Contador de pacientes
